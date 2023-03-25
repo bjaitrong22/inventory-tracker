@@ -7,18 +7,18 @@ export default function BeanList(props) {
   return (
     <>
       <hr />
-      {props.beanList.map((sackOfBeans) =>
-        <div id="beanDetail">
+      <div id="beanDetail">
+        {props.beanList.map((sackOfBeans) =>
           <SackOfBeans 
-          whenSackOfBeansClicked= {props.onSackOfBeansSelection}
-          name={sackOfBeans.name}
-          origin={sackOfBeans.origin}
-          price={sackOfBeans.price}
-          roast={sackOfBeans.roast}
-          id={sackOfBeans.id}
-          key={sackOfBeans.id}/>
-        </div>        
-      )}
+            whenSackOfBeansClicked= { props.onSackOfBeansSelection }
+            name={sackOfBeans.name}
+            origin={sackOfBeans.origin}
+            price={sackOfBeans.price}
+            roast={sackOfBeans.roast}
+            id={sackOfBeans.id}
+            key={sackOfBeans.id}/>      
+        )}
+     </div>  
     </>
   );
 }

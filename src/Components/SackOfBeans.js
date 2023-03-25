@@ -22,5 +22,4 @@ SackOfBeans.propTypes = {
   roast: PropTypes.string,
   id: PropTypes.string,
   whenSackOfBeansClicked:PropTypes.func
-
-}
+};
