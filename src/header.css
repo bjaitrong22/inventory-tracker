@@ -1,0 +1,16 @@
+body {
+  background-image: url(./img/steamingRed.jpg);
+}
+
+h1 {
+  text-align: center;
+}
+footer {
+  font-size: x-small;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  color:gray;
+  padding: 8px;
+}
