@@ -8,7 +8,7 @@ export default function SackOfBeans(props) {
         <h3>{props.name}</h3>
         <p>Origin: {props.origin}</p>
         <p>Price: {props.price}</p>
-        <p>Roast Type: {props.roast}</p>
+        <p>Roast: {props.roast}</p>
         <hr />
       </div>
     </>
@@ -18,9 +18,9 @@ export default function SackOfBeans(props) {
 SackOfBeans.propTypes = {
   name: PropTypes.string,
   origin: PropTypes.string,
-  price: PropTypes.number,
+  price: PropTypes.string,
   roast: PropTypes.string,
-  id: PropTypes.number,
+  id: PropTypes.string,
   whenSackOfBeansClicked:PropTypes.func
 
 }

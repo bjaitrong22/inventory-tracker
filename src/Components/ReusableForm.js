@@ -18,7 +18,7 @@ export default function ReusableForm(props) {
           required
         />
         <input
-        type='decimal'
+        type='text'
         name='price'
         placeholder='Price per lbs.'
         required
