@@ -1,5 +1,6 @@
 import React from 'react';
 import BeanList from './BeanList';
+import AddSackOfBeansForm from './AddSackOfBeansForm';
 
 export default class BeanInventoryControl extends React.Component {
   constructor(props) {
@@ -11,7 +12,24 @@ export default class BeanInventoryControl extends React.Component {
   }
 
   handleClick = () => {
-    console.log("handleClick works!");
+    if (this.state.selectedTicket != null) {
+      this.setState({
+        formVisibleOnPage: false,
+        selectedSackOfBeans: null,
+      });
+    } else {
+      this.setState(prevState => ({
+        formVisibleOnPage: !prevState.formVisibleOnPage
+      }));
+    }
+  }
+
+  handleAddingAddSackOfBeansToList = (addSackOfBeans) => {
+    const newMainBeanList = this.state.mainBeanList.concat(addSackOfBeans);
+    this.setState({
+      mainBeanList: newMainBeanList,
+      formVisibleOnPage: false,
+    });
   }
 
   handleChangingSelectedSackOfBeans = (id) => {
@@ -24,10 +42,16 @@ export default class BeanInventoryControl extends React.Component {
     let button = null;
     let buttonText = null;
 
-    currentlyVisibleState = <BeanList beanList={this.state.mainBeanList} onSackOfBeansSelection={this.handleChangingSelectedSackOfBeans} />
-    buttonText = "Add Sack Of Beans";
-    button = <button onClick={this.handleClick}>{buttonText}</button>;
-
+    if (this.state.formVisibleOnPage) {
+      currentlyVisibleState = <AddSackOfBeansForm onAddSackOfBeansCreation={this.handleAddingAddSackOfBeansToList} />
+      buttonText = "Return to Bean List";
+      button = <button onClick={this.handleClick}>{buttonText}</button>;
+    } else {
+      currentlyVisibleState = <BeanList beanList={this.state.mainBeanList} onSackOfBeansSelection={this.handleChangingSelectedSackOfBeans} />
+      buttonText = "Add Sack Of Beans";
+      button = <button onClick={this.handleClick}>{buttonText}</button>;
+    }
+    
     return (
       <>
         {currentlyVisibleState}

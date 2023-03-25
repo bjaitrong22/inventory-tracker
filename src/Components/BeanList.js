@@ -1,13 +1,15 @@
 import React from 'react';
 import SackOfBeans from './SackOfBeans';
 import PropTypes from 'prop-types';
+import './../beanList.css';
 
 export default function BeanList(props) {
   return (
     <>
       <hr />
       {props.beanList.map((sackOfBeans) =>
-        <SackOfBeans 
+        <div id="beanList">
+          <SackOfBeans 
           whenSackOfBeansClicked= {props.onSackOfBeansSelection}
           name={sackOfBeans.name}
           origin={sackOfBeans.origin}
@@ -15,6 +17,7 @@ export default function BeanList(props) {
           roast={sackOfBeans.roast}
           id={sackOfBeans.id}
           key={sackOfBeans.id}/>
+        </div>        
       )}
     </>
   );
