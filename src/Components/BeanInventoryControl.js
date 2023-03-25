@@ -1,6 +1,7 @@
 import React from 'react';
 import BeanList from './BeanList';
 import AddSackOfBeansForm from './AddSackOfBeansForm';
+import SackOfBeansDetail from './SackOfBeansDetail';
 
 export default class BeanInventoryControl extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ export default class BeanInventoryControl extends React.Component {
   }
 
   handleClick = () => {
-    if (this.state.selectedTicket != null) {
+    if (this.state.selectedSackOfBeans != null) {
       this.setState({
         formVisibleOnPage: false,
         selectedSackOfBeans: null,
@@ -44,6 +45,10 @@ export default class BeanInventoryControl extends React.Component {
 
     if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <AddSackOfBeansForm onAddSackOfBeansCreation={this.handleAddingAddSackOfBeansToList} />
+      buttonText = "Return to Bean List";
+      button = <button onClick={this.handleClick}>{buttonText}</button>;
+    } else if (this.state.selectedSackOfBeans != null) {
+      currentlyVisibleState = <SackOfBeansDetail sackOfBeans = { this.state.selectedSackOfBeans}/>
       buttonText = "Return to Bean List";
       button = <button onClick={this.handleClick}>{buttonText}</button>;
     } else {
