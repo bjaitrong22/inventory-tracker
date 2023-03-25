@@ -1,0 +1,26 @@
+import React from 'react';
+import SackOfBeans from './SackOfBeans';
+import PropTypes from 'prop-types';
+
+export default function BeanList(props) {
+  return (
+    <>
+      <hr />
+      {props.beanList.map((sackOfBeans) =>
+        <SackOfBeans 
+          whenSackOfBeansClicked= {props.onSackOfBeansSelection}
+          name={sackOfBeans.name}
+          origin={sackOfBeans.origin}
+          price={sackOfBeans.price}
+          roast={sackOfBeans.roast}
+          id={sackOfBeans.id}
+          key={sackOfBeans.id}/>
+      )}
+    </>
+  );
+}
+
+BeanList.propTypes = {
+  beanList: PropTypes.array,
+  onSackOfBeansSelection: PropTypes.func
+};
