@@ -38,17 +38,36 @@ export default class BeanInventoryControl extends React.Component {
     this.setState({selectedSackOfBeans: selectedSackOfBeans});
   }
 
+  handleBeanSold = (sackOfBeansWithSale) => {
+    
+    if (sackOfBeansWithSale.quantity !== 0) {
+      const reducedQuantity = sackOfBeansWithSale.quantity -= 1;
+      const sackWithLessBeans = {...sackOfBeansWithSale, quantity: reducedQuantity};
+
+      const editedMainBeanList = this.state.mainBeanList
+      .filter(beansSold => beansSold.id !== this.state.selectedSackOfBeans.id)
+      .concat(sackWithLessBeans);
+      
+      this.setState({
+        mainTicketList: editedMainBeanList,
+        selectedSackOfBeans: null
+      });
+    }  
+
+    
+  }
+
   render() {
     let currentlyVisibleState = null;
     let button = null;
     let buttonText = null;
-
+  
     if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <AddSackOfBeansForm onAddSackOfBeansCreation={this.handleAddingAddSackOfBeansToList} />
       buttonText = "Return to Bean List";
       button = <button onClick={this.handleClick}>{buttonText}</button>;
     } else if (this.state.selectedSackOfBeans != null) {
-      currentlyVisibleState = <SackOfBeansDetail sackOfBeans = { this.state.selectedSackOfBeans}/>
+      currentlyVisibleState = <SackOfBeansDetail sackOfBeans = { this.state.selectedSackOfBeans} onClickingSale={this.handleBeanSold}/>
       buttonText = "Return to Bean List";
       button = <button onClick={this.handleClick}>{buttonText}</button>;
     } else {

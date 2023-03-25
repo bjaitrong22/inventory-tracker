@@ -14,11 +14,14 @@ export default function SackOfBeansDetail(props) {
         <h3>Price: {sackOfBeans.price}</h3>
         <h3>Roast: {sackOfBeans.roast}</h3>
         <h3>Quantity: {sackOfBeans.quantity} lbs</h3>
+        <button onClick={() => props.onClickingSale(sackOfBeans) }>Sell 1 lbs</button>
+        <hr />
       </div>    
     </>
-  );
+  ); 
 }
 
 SackOfBeansDetail.propTypes = {
-  sackOfBeans: Proptypes.object
+  sackOfBeans: Proptypes.object,
+  onClickingSale: Proptypes.func
 }
