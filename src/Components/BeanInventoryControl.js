@@ -2,6 +2,7 @@ import React from 'react';
 import BeanList from './BeanList';
 import AddSackOfBeansForm from './AddSackOfBeansForm';
 import SackOfBeansDetail from './SackOfBeansDetail';
+import EditSackOfBeansForm from './EditSackOfBeansForm';
 
 export default class BeanInventoryControl extends React.Component {
   constructor(props) {
@@ -9,6 +10,7 @@ export default class BeanInventoryControl extends React.Component {
     this.state = {
       mainBeanList: [],
       selectedSackOfBeans: null,
+      editing: false
     };
   }
 
@@ -17,6 +19,7 @@ export default class BeanInventoryControl extends React.Component {
       this.setState({
         formVisibleOnPage: false,
         selectedSackOfBeans: null,
+        editing: false
       });
     } else {
       this.setState(prevState => ({
@@ -52,22 +55,41 @@ export default class BeanInventoryControl extends React.Component {
         mainTicketList: editedMainBeanList,
         selectedSackOfBeans: null
       });
-    }  
+    }    
+  }
 
-    
+  handleEditClick = () => {
+    this.setState({editing: true});
+  }
+
+  handleEditingSackOfBeansInList = (sackOfBeansToEdit) => {
+    const editedMainBeanList = this.state.mainBeanList
+      .filter(sackOfBeans => sackOfBeans.id !== this.state.selectedSackOfBeans.id)
+      .concat(sackOfBeansToEdit);
+    this.setState({
+      mainBeanList: editedMainBeanList,
+      editing: false,
+      selectedSackOfBeans: null
+    })
   }
 
   render() {
     let currentlyVisibleState = null;
     let button = null;
     let buttonText = null;
-  
-    if (this.state.formVisibleOnPage) {
+    
+    if (this.state.editing){
+      currentlyVisibleState = <EditSackOfBeansForm sackOfBeans= {this.state.selectedSackOfBeans}
+      onEditSackOfBeans = {this.handleEditingSackOfBeansInList} />
+      buttonText = "Return to Bean List";
+    } else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <AddSackOfBeansForm onAddSackOfBeansCreation={this.handleAddingAddSackOfBeansToList} />
       buttonText = "Return to Bean List";
       button = <button onClick={this.handleClick}>{buttonText}</button>;
     } else if (this.state.selectedSackOfBeans != null) {
-      currentlyVisibleState = <SackOfBeansDetail sackOfBeans = { this.state.selectedSackOfBeans} onClickingSale={this.handleBeanSold}/>
+      currentlyVisibleState = <SackOfBeansDetail sackOfBeans = { this.state.selectedSackOfBeans} 
+      onClickingSale={this.handleBeanSold}
+      onClickingEdit={this.handleEditClick}/>
       buttonText = "Return to Bean List";
       button = <button onClick={this.handleClick}>{buttonText}</button>;
     } else {
