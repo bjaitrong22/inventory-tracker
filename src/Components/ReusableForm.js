@@ -9,23 +9,25 @@ export default function ReusableForm(props) {
           type='text'
           name='name'
           placeholder="Name of beans"
-          required
+          required="required"
         />
         <input
           type='text'
           name='origin'
           placeholder='Beans place of origin'
-          required
+          required="required"
         />
         <input
         type='text'
         name='price'
         placeholder='Price per lbs'
+        required="required"
         />
         <input
         type='text'
         name='roast'
         placeholder="light,medium, or dark"
+        required="required"
         />
         <button type='submit'>{props.buttonText}</button>
       </form>
