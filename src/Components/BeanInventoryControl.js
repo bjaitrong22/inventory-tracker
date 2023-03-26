@@ -70,7 +70,15 @@ export default class BeanInventoryControl extends React.Component {
       mainBeanList: editedMainBeanList,
       editing: false,
       selectedSackOfBeans: null
-    })
+    });
+  }
+
+  handleDeletingSackOfBeans = (id) => {
+    const newMainBeanList = this.state.mainBeanList.filter(sackOfBeans => sackOfBeans.id !== id);
+    this.setState({
+      mainBeanList: newMainBeanList,
+      selectedSackOfBeans:null
+    });
   }
 
   render() {
@@ -89,7 +97,8 @@ export default class BeanInventoryControl extends React.Component {
     } else if (this.state.selectedSackOfBeans != null) {
       currentlyVisibleState = <SackOfBeansDetail sackOfBeans = { this.state.selectedSackOfBeans} 
       onClickingSale={this.handleBeanSold}
-      onClickingEdit={this.handleEditClick}/>
+      onClickingEdit={this.handleEditClick}
+      onClickingDelete={this.handleDeletingSackOfBeans}/>
       buttonText = "Return to Bean List";
       button = <button onClick={this.handleClick}>{buttonText}</button>;
     } else {

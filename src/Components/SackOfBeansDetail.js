@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './../beanDetail.css';
 
 export default function SackOfBeansDetail(props) {
-  const {sackOfBeans}= props;
+  const {sackOfBeans, onClickingDelete}= props;
   return (
     <>
       <div id="beanDetail">
@@ -15,6 +15,7 @@ export default function SackOfBeansDetail(props) {
         <h3>Quantity: {sackOfBeans.quantity} lbs</h3>
         <button onClick={() => props.onClickingSale(sackOfBeans) }>Sell 1 lbs</button>
         <button onClick={ props.onClickingEdit }>Update This Inventory</button>
+        <button onClick={() => onClickingDelete(sackOfBeans.id)}>Delete This Inventory</button>
         <hr />
       </div>    
     </>
@@ -24,5 +25,6 @@ export default function SackOfBeansDetail(props) {
 SackOfBeansDetail.propTypes = {
   sackOfBeans: PropTypes.object,
   onClickingSale: PropTypes.func,
-  onClickingEdit: PropTypes.func
+  onClickingEdit: PropTypes.func,
+  onClickingDelete: PropTypes.func
 }
