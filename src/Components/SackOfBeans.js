@@ -7,7 +7,7 @@ export default function SackOfBeans(props) {
       <div onClick = {() => props.whenSackOfBeansClicked(props.id)}>
         <h3>{props.name}</h3>
         <p>Origin: {props.origin}</p>
-        <p>Price: {props.price}</p>
+        <p>Price: ${props.price} per lbs</p>
         <p>Roast: {props.roast}</p>
         <hr />
       </div>
